@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}7조의 장고 홈페이지입니다.{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+<div id="content">
+
+    <h1>북마크 업데이트/생성하기(사용자: {{user}})</h1>
+
+    <form action="." method="post">{% csrf_token %}
+
+    {% if form.errors %}
+    <p class="errornote">틀렸습니다! 정확한 정보를 입력하세요.</p>
+    {% endif %}
+
+    <p>북마크 작성 또는 업데이트를 하기 위한 양식</p>
+
+    <fieldset class="aligned">
+
+        <div class="form-row">
+            {{ form.title.label_tag }} {{ form.title }}
+        </div>
+    
+        <div class="form-row">
+            {{ form.url.label_tag }} {{ form.url }}
+        </div>
+
+    </fieldset>
+
+    <div class="submit-row">
+        <input type="submit" value="확인"/>
+    </div>
+
+    <script type="text/javascript">document.getElementById('id_title').focus();</script>
+    </form>
+
+</div>
+{% endblock %}
